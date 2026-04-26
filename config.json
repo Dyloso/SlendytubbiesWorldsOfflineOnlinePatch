@@ -1,0 +1,18 @@
+{
+  "TransportDLL": "MultiCompiled.dll",
+  "TransportClass": "Mirror.SimpleWebTransport",
+  "AuthenticationKey": "Lemonade",
+  "TransportPort": 7778,
+  "UpdateLoopTime": 10,
+  "UpdateHeartbeatInterval": 100,
+  "UseEndpoint": true,
+  "EndpointPort": 8080,
+  "EndpointServerList": true,
+  "EnableNATPunchtroughServer": true,
+  "NATPunchtroughPort": 7776,
+  "UseLoadBalancer": false,
+  "LoadBalancerAuthKey": "AuthKey",
+  "LoadBalancerAddress": "127.0.0.1",
+  "LoadBalancerPort": 7070,
+  "LoadBalancerRegion": 1
+}
