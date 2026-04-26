@@ -203,6 +203,15 @@ If you launched the game before starting the LRM server, you can get online with
 
 ---
 
+## Known Limitations
+
+- **Usernames are non-functional** — player display names will not show correctly in-game. This is due to bypassing the original authentication server.
+- **In-game chat is non-functional** — for the same reason as above.
+
+A fix for both may be added in a future update based on community feedback.
+
+---
+
 ## Credits
 
 Reverse engineered and developed using MelonLoader, Harmony, Unity Explorer, ILSpy, dotPeek, and Wireshark. The game uses Mirror networking with Light Reflective Mirror as the relay transport.
