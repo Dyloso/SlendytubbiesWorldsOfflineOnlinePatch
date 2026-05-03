@@ -1,6 +1,17 @@
-# Slendytubbies Worlds — Multiplayer Setup Guide
+# Slendytubbies Worlds — Setup Guide
 
-This mod restores online multiplayer and Open World functionality to Slendytubbies Worlds using a self-hosted relay server. Both **Play Online** and **Join An Open World** are fully supported.
+This mod restores offline singleplayer and self-hosted online multiplayer to Slendytubbies Worlds. Two separate mods are provided depending on how you want to play.
+
+---
+
+## Which Mod Do I Need?
+
+| Mod | File | Use Case |
+|-----|------|----------|
+| **Offline Singleplayer** | `OfflineSingleplayer.dll` | Solo play, no internet required |
+| **Online Multiplayer** | `OnlineMultiplayer.dll` | Play with friends over Hamachi |
+
+You only need **one** of these at a time. Do not use both simultaneously.
 
 ---
 
@@ -8,9 +19,11 @@ This mod restores online multiplayer and Open World functionality to Slendytubbi
 
 - A copy of **Slendytubbies Worlds**
 - [MelonLoader 0.6.6](https://github.com/LavaGang/MelonLoader/releases/tag/v0.6.6) — other versions are not compatible
+- The mod file(s) from this repository
+
+**For Online Multiplayer only:**
 - [Light Reflective Mirror (LRM) Node v12](https://github.com/Derek-R-S/Light-Reflective-Mirror/releases) — required to run the relay server (host only)
 - [LogMeIn Hamachi](https://vpn.net) — for connecting with friends over the internet
-- The `OfflineOnlinePatch.dll` mod file
 - .NET 5.0 Runtime — required to run the LRM server
 
 ---
@@ -26,15 +39,33 @@ This mod restores online multiplayer and Open World functionality to Slendytubbi
 
 ### 2. Install The Mod
 
-1. Copy `OfflineOnlinePatch.dll` into the `Mods/` folder in your game directory
-2. Launch the game once to generate the config file
-3. Close the game
+1. Copy either `OfflineSingleplayer.dll` or `OnlineMultiplayer.dll` into the `Mods/` folder
+2. Only use **one mod at a time**
+
+**For Online Multiplayer only:**
+
+3. Launch the game once to generate the config file, then close it
 4. Open `UserData/OfflineOnlinePatch.cfg` — it should contain:
    ```
    RelayIP=127.0.0.1
    ```
 
-### 3. Set Up The LRM Relay Server (Host Only)
+---
+
+## Offline Singleplayer Setup
+
+No additional setup needed. Simply:
+
+1. Copy `OfflineSingleplayer.dll` into the `Mods/` folder
+2. Launch the game and play
+
+Both **Play Online** and **Join An Open World** work in singleplayer mode, including warping and fast travel between maps.
+
+---
+
+## Online Multiplayer Setup
+
+### Set Up The LRM Relay Server (Host Only)
 
 The host is the person who runs the relay server. Only one person needs to do this.
 
@@ -64,7 +95,7 @@ The host is the person who runs the relay server. Only one person needs to do th
    ```
 5. Save and close the file
 
-### 4. Open Firewall Ports (Host Only)
+### Open Firewall Ports (Host Only)
 
 Run the following commands in **PowerShell as Administrator**:
 
@@ -74,9 +105,7 @@ netsh advfirewall firewall add rule name="LRM Relay UDP" dir=in action=allow pro
 netsh advfirewall firewall add rule name="LRM Endpoint" dir=in action=allow protocol=TCP localport=8080
 ```
 
----
-
-## Setting Up Hamachi
+### Set Up Hamachi
 
 Both the host and all players need to complete these steps.
 
@@ -108,7 +137,7 @@ To verify Hamachi is working, right click a friend in Hamachi and click **Diagno
 
 ---
 
-## Every Session
+## Every Session (Online Multiplayer)
 
 ### Host
 
@@ -133,32 +162,42 @@ To verify Hamachi is working, right click a friend in Hamachi and click **Diagno
 
 ## Playing
 
-### Play Online
+### Play Online (Multiplayer)
 
 1. Click **Play Online** from the main menu
-2. **Host:** Click **Create Room**, configure your room, and start
+2. **Host:** Click **Create a Room**, configure your room, and start
 3. **Players:** Click **Refresh** and join the host's room from the list
 
-### Join An Open World
+### Join An Open World (Multiplayer)
 
 1. Click **Join An Open World** from the main menu
 2. **First player to join a world** becomes the host for that world automatically
 3. **Other players** click **Join** on the same world to join the existing session
-4. Multiple players can share the same Open World instance this way
 
 ---
-
-## Solo Play
-
-Solo play works without Hamachi or the LRM server. Simply launch the game and play normally — the mod handles everything automatically.
-
-If the relay server is not running, the game will wait 5 seconds then let you in anyway. The connecting animation will play briefly before disappearing.
 
 ## Checking Your Online Status
 
 The bottom right corner of the title screen shows the current player count. If it says **"0 Players Online"** you are in offline mode and multiplayer will not be available. If it shows **"1 Player Online"** or more, you are connected to the relay and multiplayer is ready to use.
 
 If you launched the game before starting the LRM server, you can get online without restarting — simply join any game mode and return to the title screen. This will trigger a fresh connection check and the player count should update to reflect your online status.
+
+---
+
+## Solo Play
+
+The **Offline Singleplayer** mod works without Hamachi or the LRM server. Simply launch the game and play normally.
+
+If using the **Online Multiplayer** mod without the LRM server running, the game will wait 5 seconds then let you in anyway in offline mode.
+
+---
+
+## Known Limitations
+
+- **Usernames are non-functional** — player display names will not show correctly in-game. This is due to bypassing the original authentication server.
+- **In-game chat is non-functional** — for the same reason as above.
+
+A fix for both may be added in a future update based on community feedback.
 
 ---
 
@@ -171,7 +210,7 @@ If you launched the game before starting the LRM server, you can get online with
 
 **Room list is empty:**
 - Make sure the host has `RunNode.bat` running as administrator
-- Make sure both players have the correct Hamachi IP in `OfflineOnlinePatch.cfg`
+- Make sure both players have the correct Hamachi IP in `OnlineMultiplayer.cfg`
 - Try clicking the **Refresh** button in the room list
 
 **Can't connect to relay:**
@@ -196,19 +235,11 @@ If you launched the game before starting the LRM server, you can get online with
 
 | File | Location | Purpose |
 |------|----------|---------|
-| `OfflineOnlinePatch.dll` | `Mods/` | The mod file |
-| `OfflineOnlinePatch.cfg` | `UserData/` | Relay IP configuration |
+| `OfflineSingleplayer.dll` | `Mods/` | Offline singleplayer mod |
+| `OnlineMultiplayer.dll` | `Mods/` | Online multiplayer mod |
+| `OfflineOnlinePatch.cfg` | `UserData/` | Relay IP configuration (multiplayer only) |
 | `RunNode.bat` | LRM folder | Starts the relay server (run as administrator) |
 | `config.json` | LRM folder | LRM server configuration |
-
----
-
-## Known Limitations
-
-- **Usernames are non-functional** — player display names will not show correctly in-game. This is due to bypassing the original authentication server.
-- **In-game chat is non-functional** — for the same reason as above.
-
-A fix for both may be added in a future update based on community feedback.
 
 ---
 
