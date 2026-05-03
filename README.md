@@ -196,6 +196,8 @@ If using the **Online Multiplayer** mod without the LRM server running, the game
 
 - **Usernames are non-functional** — player display names will not show correctly in-game. This is due to bypassing the original authentication server.
 - **In-game chat is non-functional** — for the same reason as above.
+- **Warping in offline OnlineMultiplayer Open World is non-functional** — this bug is patched out in OfflineSingleplayer. 
+
 
 A fix for both may be added in a future update based on community feedback.
 
